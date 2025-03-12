@@ -9,12 +9,12 @@ public class Patient {
     private String address;
     private String svnNummer;
     
-    public Patient(int id, String name, String birthdate, String addres, String svn){
+    public Patient(int id, String name, String birthdate, String address, String svnNummer){
         this.id = id;
         this.name = name;
         this.birthdate = birthdate;
-        this.address = addres;
-        this.svnNummer = svn;
+        this.address = address;
+        this.svnNummer = svnNummer;
     }
     
 }
