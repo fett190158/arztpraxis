@@ -9,11 +9,11 @@ public class Patient {
     private String address;
     private String svnNummer;
     
-    public Patient(int id, String name, String birthdate, String address, String svn){
+    public Patient(int id, String name, String birthdate, String addres, String svn){
         this.id = id;
         this.name = name;
         this.birthdate = birthdate;
-        this.address = address;
+        this.address = addres;
         this.svnNummer = svn;
     }
     
