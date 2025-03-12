@@ -40,9 +40,6 @@ public class Arztpraxis {
     }
     
     private static void erzeugePatientenStamm() {
-
-        /*
-        
         Patient p1 = new Patient(1, "Martin HUBER", "05.04.1978", "Vogelgasse 34, 8010", "364634345");
         patientenStamm[0] = p1;
          Patient p2 = new Patient(2, "Jan BOZNIK", "11.05.1998", "Kärnterstraße 22, 8030", "76853453");
@@ -83,9 +80,6 @@ public class Arztpraxis {
         patientenStamm[18] = p19;
          Patient p20 = new Patient(20, "Max GAUBE", "18.06.1979", "Merangasse 173, 8020", "34747583");
         patientenStamm[19] = p20;
-        
-        */
-        
     }
     
 }
