@@ -38,9 +38,16 @@ public class Rezeption {
         System.out.println("Wo wohnen Sie?");
         String newPatientAddress = input.nextLine();
         
+        int newPatientID = 1;
+        for (int i = Arztpraxis.patientenStamm.length-1; i > 0; i--) {
+            if(Arztpraxis.patientenStamm[i] != null){
+                newPatientID = Arztpraxis.patientenStamm[i].getID()+1;
+            }
+        }
+        
         for (int i = 0; i < Arztpraxis.tagesPatienten.length; i++) {
             if(Arztpraxis.tagesPatienten[i] == null){
-                return new Patient(neuePatientenID(), newPatientName, newPatientBirthdate, newPatientAddress, svnNumber);
+                return new Patient(newPatientID, newPatientName, newPatientBirthdate, newPatientAddress, svnNumber);
             }
         }
         return null;
@@ -55,14 +62,5 @@ public class Rezeption {
                                    +"*----------------------------------*");
             }
         }
-    }
-    
-    public int neuePatientenID() {
-        for (int i = Arztpraxis.patientenStamm.length-1; i > 0; i--) {
-            if(Arztpraxis.patientenStamm[i] != null){
-                return Arztpraxis.patientenStamm[i].getID()+1;
-            }
-        }
-        return 1;
     }
 }
