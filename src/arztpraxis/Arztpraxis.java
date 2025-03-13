@@ -1,28 +1,7 @@
-/*
-  SWE02 - Objektorientierte Programmierung
-  
-  ************************************************************************
-    
-  SZENARIO: Arztpraxis
-  Wir möchten eine Software für eine Arztpraxis entwickeln.  
-  Dafür werden wir in jeder Übungseinheit weitere Funktionalitäten sowie 
-  eine grafische Benutzeroberfläche (GUI) implementieren und 
-  so die Software und die GUI stetig erweitern. 
-
-  ************************************************************************
-  ACHTUNG:                                                      
-  Inhalte der Übungen können auch Inhalte der Prüfung sein. Bearbeiten 
-  Sie das Übungsprojekt am Besten in der angegebenen Reihenfolge.      
-  Dies entspricht in etwa der Abfolge der Inhalte der Vorlesung.       
-  Die Übungsbeispiele sind aufbauend, dh. Klassen und Methoden,        
-  die in den Übungen implementiert werden, können in den              
-  Folge-Übungen wiederverwendet, erweitert oder modifiziert werden.    
-  ************************************************************************
-
- */
 package arztpraxis;
 
 import arztpraxis.persons.Patient;
+import arztpraxis.rooms.Rezeption;
 
 
 public class Arztpraxis {
@@ -34,12 +13,59 @@ public class Arztpraxis {
 
     
     public static void main(String[] args) {
+        String[] svnNummern = {"03453534", "76853453", "546736456", "7456434345", "56734564536"};
+        erzeugePatientenStamm();
+        Rezeption rezeption = new Rezeption();
         
-        String [] svnNummern = {"03453534", "76853453", "546736456", "7456434345", "56734564536" };
-      
+        // Jede Nummer in svnNummern Anmelden:
+        for (int i = 0; i < svnNummern.length; i++) {
+            
+            // Prüfen ob Patient in patientenStamm vorhanden ist:
+            if(rezeption.patientAnmelung(svnNummern[i]) == null){
+                // -> Patient nicht vorhanden
+                
+                // Patient erstellen:
+                Patient newPatient = rezeption.patientAufnehmen(svnNummern[i]);
+                
+                // Patient zu erster freien Stelle in patientenStamm hinzufügen:
+                for (int j = 0; j < patientenStamm.length; j++) {
+                    if(patientenStamm == null){
+                        newPatient = patientenStamm[j];
+                        break;
+                    }
+                }
+                
+                // Patient zu erster freien Stelle in tagesPatienten hinzufügen:
+                for (int j = 0; j < tagesPatienten.length; j++) {
+                    if(tagesPatienten[j] == null){
+                        tagesPatienten[j] = newPatient;
+                        break;
+                    }
+                }
+            }
+            
+            // -> Patient vorhanden
+            // Stelle des Patienten in PatientenStamm herausfinden:
+            for (int j = 0; j < patientenStamm.length; j++) {
+                if(patientenStamm[j] != null && patientenStamm[j].getSVNNumber().equals(svnNummern[i])){
+                    
+                    //Patient zu erster freien Stelle in tagesPatienten hinzufügen:
+                    for (int k = 0; k < tagesPatienten.length; k++) {
+                        if(tagesPatienten[k] == null){
+                            tagesPatienten[k] = patientenStamm[j];
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        rezeption.zeigeTagespPatienten();
     }
     
     private static void erzeugePatientenStamm() {
+        
+        // Bereits bekannte Patienten zu PatientenStamm hinzufügen:
         Patient p1 = new Patient(1, "Martin HUBER", "05.04.1978", "Vogelgasse 34, 8010", "364634345");
         patientenStamm[0] = p1;
          Patient p2 = new Patient(2, "Jan BOZNIK", "11.05.1998", "Kärnterstraße 22, 8030", "76853453");
@@ -81,5 +107,4 @@ public class Arztpraxis {
          Patient p20 = new Patient(20, "Max GAUBE", "18.06.1979", "Merangasse 173, 8020", "34747583");
         patientenStamm[19] = p20;
     }
-    
 }
