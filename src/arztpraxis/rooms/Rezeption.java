@@ -17,7 +17,7 @@ public class Rezeption {
         }
         return null;
     }
-
+//hallo
     public Patient patientAufnehmen(String svnNumber) {
         Scanner input = new Scanner(System.in);
 
