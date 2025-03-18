@@ -6,14 +6,13 @@ import arztpraxis.persons.Patient;
 
 public class Rezeption {
 
-    public Rezeption() {
-    }
+    public Rezeption() {}
 
-    public String patientAnmelung(String svnNumber) {
+    public Patient patientAnmelung(String svnNumber) {
         for (int i = 0; i < Arztpraxis.patientenStamm.length; i++) {
             if (Arztpraxis.patientenStamm[i] != null
                     && Arztpraxis.patientenStamm[i].getSVNNumber().equals(svnNumber)) {
-                return Arztpraxis.patientenStamm[i].lieferDaten();
+                return Arztpraxis.patientenStamm[i];
             }
         }
         return null;
@@ -38,16 +37,11 @@ public class Rezeption {
             }
         }
 
-        for (int i = 0; i < Arztpraxis.tagesPatienten.length; i++) {
-            if (Arztpraxis.tagesPatienten[i] == null) {
-                return new Patient(newPatientID,
-                        newPatientName,
-                        newPatientBirthdate,
-                        newPatientAddress,
-                        svnNumber);
-            }
-        }
-        return null;
+        return new Patient(newPatientID,
+                           newPatientName,
+                           newPatientBirthdate,
+                           newPatientAddress,
+                           svnNumber);   
     }
 
     public void zeigeTagespPatienten() {

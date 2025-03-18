@@ -9,13 +9,14 @@ public class Arztpraxis {
     public static Patient[] tagesPatienten = new Patient[10];
 
     public static void main(String[] args) {
+        
         String[] svnNummern = {"03453534", "76853453", "546736456", "7456434345", "56734564536"};
         erzeugePatientenStamm();
         Rezeption rezeption = new Rezeption();
-
+        
         // Jede Nummer in svnNummern anmelden:
         for (int i = 0; i < svnNummern.length; i++) {
-
+            
             // Prüfen, ob Patient in patientenStamm vorhanden ist:
             if (rezeption.patientAnmelung(svnNummern[i]) == null) {
                 // -> Patient nicht vorhanden
@@ -39,20 +40,14 @@ public class Arztpraxis {
                     }
                 }
             }
-
-            // -> Patient vorhanden
-            // Stelle des Patienten in PatientenStamm herausfinden:
-            for (int j = 0; j < patientenStamm.length; j++) {
-                if (patientenStamm[j] != null && patientenStamm[j].getSVNNumber().equals(svnNummern[i])) {
-
-                    // Patient zu erster freien Stelle in tagesPatienten hinzufügen:
-                    for (int k = 0; k < tagesPatienten.length; k++) {
-                        if (tagesPatienten[k] == null) {
-                            tagesPatienten[k] = patientenStamm[j];
-                            break;
-                        }
+            else{
+                // -> Patient vorhanden
+                // Patient zu erster freien Stelle in tagesPatienten hinzufügen:
+                for (int j = 0; j < tagesPatienten.length; j++) {
+                    if (tagesPatienten[j] == null) {
+                        tagesPatienten[j] = rezeption.patientAnmelung(svnNummern[i]);
+                        break;
                     }
-                    break;
                 }
             }
         }

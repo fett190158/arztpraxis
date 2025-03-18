@@ -3,6 +3,7 @@ package arztpraxis.persons;
 import arztpraxis.Arztpraxis;
 
 public class Patient {
+    
     private int id;
     private String name;
     private String birthdate;
@@ -28,8 +29,6 @@ public class Patient {
     public String getSVNNumber() {
         return this.svnNumber;
     }
-
-    
 
     public String lieferDaten() {
         int tagesPatientenNr = 1;
