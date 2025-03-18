@@ -21,13 +21,13 @@ public class Arztpraxis {
             if (rezeption.patientAnmelung(svnNummern[i]) == null) {
                 // -> Patient nicht vorhanden
 
-                // Patient erstellen:
+                // neuen Patient erstellen:
                 Patient newPatient = rezeption.patientAufnehmen(svnNummern[i]);
 
                 // Patient zu erster freien Stelle in patientenStamm hinzufügen:
                 for (int j = 0; j < patientenStamm.length; j++) {
                     if (patientenStamm == null) {
-                        newPatient = patientenStamm[j];
+                        patientenStamm[j] = newPatient;
                         break;
                     }
                 }
@@ -42,6 +42,7 @@ public class Arztpraxis {
             }
             else{
                 // -> Patient vorhanden
+                
                 // Patient zu erster freien Stelle in tagesPatienten hinzufügen:
                 for (int j = 0; j < tagesPatienten.length; j++) {
                     if (tagesPatienten[j] == null) {
@@ -55,7 +56,6 @@ public class Arztpraxis {
     }
 
     private static void erzeugePatientenStamm() {
-        // Bereits bekannte Patienten zu PatientenStamm hinzufügen:
         Patient p1 = new Patient(1, "Martin HUBER", "05.04.1978", "Vogelgasse 34, 8010", "364634345");
         patientenStamm[0] = p1;
          Patient p2 = new Patient(2, "Jan BOZNIK", "11.05.1998", "Kärnterstraße 22, 8030", "76853453");

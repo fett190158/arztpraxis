@@ -18,16 +18,44 @@ public class Patient {
         this.svnNumber = svnNumber;
     }
 
-    public int getID() {
-        return this.id;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
-    
-    public String getSVNNumber() {
-        return this.svnNumber;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getSvnNumber() {
+        return svnNumber;
+    }
+
+    public void setSvnNumber(String svnNumber) {
+        this.svnNumber = svnNumber;
     }
 
     public String lieferDaten() {
