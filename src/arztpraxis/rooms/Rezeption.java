@@ -37,6 +37,7 @@ public class Rezeption {
         for (int i = Arztpraxis.patientenStamm.length - 1; i > 0; i--) {
             if (Arztpraxis.patientenStamm[i] != null) {
                 newPatientID = Arztpraxis.patientenStamm[i].getId() + 1;
+                break;
             }
         }
 
@@ -49,11 +50,11 @@ public class Rezeption {
 
     public void zeigeTagespPatienten() {
         System.out.println("********** Tagespatienten **********\n"
-                          +"*----------------------------------*");
+                         + "*----------------------------------*");
         for (int i = 0; i < Arztpraxis.tagesPatienten.length; i++) {
             if (Arztpraxis.tagesPatienten[i] != null) {
-                System.out.println(Arztpraxis.tagesPatienten[i].lieferDaten()+"\n"
-                          +"*----------------------------------*");
+                System.out.println(Arztpraxis.tagesPatienten[i].lieferDaten() + "\n"
+                         + "*----------------------------------*");
             }
         }
     }

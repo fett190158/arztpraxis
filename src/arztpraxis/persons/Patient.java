@@ -1,6 +1,7 @@
 package arztpraxis.persons;
 
 import arztpraxis.Arztpraxis;
+import arztpraxis.medicalDocuments.Impfung;
 
 public class Patient {
     
@@ -9,6 +10,7 @@ public class Patient {
     private String birthdate;
     private String address;
     private String svnNumber;
+    private static Impfung[] impfpass = new Impfung[10];
 
     public Patient(int id, String name, String birthdate, String address, String svnNumber) {
         this.id = id;
@@ -57,19 +59,50 @@ public class Patient {
     public void setSvnNumber(String svnNumber) {
         this.svnNumber = svnNumber;
     }
+    
+    public Impfung[] getImpfpass(){
+        return impfpass;
+    }
 
     public String lieferDaten() {
-        int tagesPatientenNr = 1;
         for (int i = 0; i < Arztpraxis.tagesPatienten.length; i++) {
             if (Arztpraxis.tagesPatienten[i] != null &&
-                Arztpraxis.tagesPatienten[i].svnNumber.equals(this.svnNumber)) {
-                tagesPatientenNr = i + 1;
+                Arztpraxis.tagesPatienten[i].svnNumber.equals(svnNumber)) {
                 break;
             }
         }
-        return tagesPatientenNr + ".Patient " + this.name + "\n"
-                + "Geb. Datum: " + this.birthdate + "\n"
-                + "Adresse: " + this.address + "\n"
-                + "VersicherungsNr: " + this.svnNumber;
+        return this.id + ".Patient " + name + "\n"
+                + "Geb. Datum: " + birthdate + "\n"
+                + "Adresse: " + address + "\n"
+                + "VersicherungsNr: " + svnNumber;
+    }
+    
+    public void speichereImpfung(Impfung impfung){
+        for (int i = 0; i < impfpass.length; i++) {
+            if(impfpass[i] == null){
+                impfpass[i] = impfung;
+                break;
+            }
+        }
+    }
+    
+    public void zeigeImpfpass(){
+        System.out.println("************* Impfpass *************");
+        System.out.println(lieferDaten());
+        System.out.println("------------------------------------");
+        
+        for (int i = 0; i < impfpass.length; i++) {
+            if(impfpass[i] != null){
+                int counter = i + 1;
+                System.out.println(counter + ". Impfung:\n"
+                        + "Name: " + impfpass[i].getName() + "\n"
+                        + "Datum: " + impfpass[i].getDate() + "\n"
+                        + "Dosis: " + impfpass[i].getDosis() + "\n"
+                        + "Wirkstoff: " + impfpass[i].getImpfstoff() + "\n"
+                        + "ChargenNr: " + impfpass[i].getChargenNummer() + "\n"
+                        + "Arzt: " + impfpass[i].getBehandelnderArzt() + "\n"
+                        + "------------------------------------");
+            }
+        }
     }
 }
