@@ -4,7 +4,7 @@ import arztpraxis.Arztpraxis;
 import java.util.Scanner;
 import arztpraxis.persons.Patient;
         
-public class Rezeption {
+public class Rezeption extends AdministrativerRaum{
 
     public Rezeption() {}
 
@@ -20,6 +20,7 @@ public class Rezeption {
         return null;
     }
 
+    
     public Patient patientAufnehmen(String svnNumber) {
         Scanner input = new Scanner(System.in);
         
