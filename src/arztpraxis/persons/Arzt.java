@@ -11,13 +11,10 @@ import java.util.Scanner;
  *
  * @author leina
  */
-public class Arzt {
-    private int id;
-    private String name;
+public abstract class Arzt extends Person {
     
     public Arzt(int id, String name){
-        this.id = id;
-        this.name = name;
+        super(id, name);
     }
     
     public void patientImpfen(Patient patient){

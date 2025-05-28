@@ -3,18 +3,15 @@ package arztpraxis.persons;
 import arztpraxis.Arztpraxis;
 import arztpraxis.medicalDocuments.Impfung;
 
-public class Patient {
+public class Patient extends Person{
     
-    private int id;
-    private String name;
     private String birthdate;
     private String address;
     private String svnNumber;
     private static Impfung[] impfpass = new Impfung[10];
 
     public Patient(int id, String name, String birthdate, String address, String svnNumber) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
         this.birthdate = birthdate;
         this.address = address;
         this.svnNumber = svnNumber;

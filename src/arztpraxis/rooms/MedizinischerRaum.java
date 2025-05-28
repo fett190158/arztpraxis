@@ -11,8 +11,11 @@ import arztpraxis.persons.Patient;
  *
  * @author leina
  */
-public class MedizinischerRaum extends Raum{
+public abstract class MedizinischerRaum extends Raum{
     
-    protected Patient patient;
-    protected Arzt arzt;
+
+    public MedizinischerRaum(int raumNr, int kapazität) {
+        super(raumNr, kapazität);
+        
+    }
 }

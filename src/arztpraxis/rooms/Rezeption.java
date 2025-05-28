@@ -3,11 +3,21 @@ package arztpraxis.rooms;
 import arztpraxis.Arztpraxis;
 import java.util.Scanner;
 import arztpraxis.persons.Patient;
+import arztpraxis.persons.Rezeptionistin;
         
 public class Rezeption extends AdministrativerRaum{
 
-    public Rezeption() {}
-
+    private Rezeptionistin rezeptionistin;
+    
+    public Rezeption(Rezeptionistin rezeptionistin, int raumNr, int kapazität) {
+        super(raumNr, kapazität);
+        this.rezeptionistin = rezeptionistin;
+    }
+     
+    @Override
+    public void patientAufnehmen(Patient p) {
+    }
+    
     public Patient patientAnmelung(String svnNumber) {
         // Wenn Patient in patientenStamm: Patient
         for (int i = 0; i < Arztpraxis.patientenStamm.length; i++) {
@@ -20,8 +30,18 @@ public class Rezeption extends AdministrativerRaum{
         return null;
     }
 
+    public int getLowestID(){
+        int newPatientID = 1;
+        for (int i = Arztpraxis.patientenStamm.length - 1; i > 0; i--) {
+            if (Arztpraxis.patientenStamm[i] != null) {
+                newPatientID = Arztpraxis.patientenStamm[i].getId() + 1;
+                break;
+            }
+        }
+        return newPatientID;
+    }
     
-    public Patient patientAufnehmen(String svnNumber) {
+    public Patient neuenPatientAufnehmen(String svnNumber) {
         Scanner input = new Scanner(System.in);
         
         System.out.println("Wie heißen Sie?");
@@ -33,16 +53,7 @@ public class Rezeption extends AdministrativerRaum{
         System.out.println("Wo wohnen Sie?");
         String newPatientAddress = input.nextLine();
 
-        // Höchste vorhandene ID + 1 herausfinden
-        int newPatientID = 1;
-        for (int i = Arztpraxis.patientenStamm.length - 1; i > 0; i--) {
-            if (Arztpraxis.patientenStamm[i] != null) {
-                newPatientID = Arztpraxis.patientenStamm[i].getId() + 1;
-                break;
-            }
-        }
-
-        return new Patient(newPatientID,
+        return new Patient(getLowestID(),
                            newPatientName,
                            newPatientBirthdate,
                            newPatientAddress,
@@ -59,4 +70,6 @@ public class Rezeption extends AdministrativerRaum{
             }
         }
     }
+
+    
 }

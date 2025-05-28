@@ -12,8 +12,13 @@ import arztpraxis.persons.Patient;
  */
 public abstract class Raum {
     
-    protected int raumNr;
-    protected int kapazität;
+    private int raumNr;
+    private int kapazität;
+
+    public Raum(int raumNr, int kapazität) {
+        this.raumNr = raumNr;
+        this.kapazität = kapazität;
+    }
     
-    public abstract Patient patientAufnehmen(String svnNummer);
+    public abstract void patientAufnehmen(Patient p);
 }

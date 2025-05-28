@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package arztpraxis.rooms;
+package arztpraxis.persons;
 
 /**
  *
  * @author leina
  */
-public abstract class AdministrativerRaum extends Raum{
+public class Rezeptionistin extends Person{
     
-    public AdministrativerRaum(int raumNr, int kapazität) {
-        super(raumNr, kapazität);
+    public Rezeptionistin(int id, String name) {
+        super(id, name);
     }
     
 }

@@ -1,9 +1,15 @@
 package arztpraxis;
 
+import arztpraxis.persons.AllgemeinMediziner;
 import arztpraxis.persons.Patient;
 import arztpraxis.rooms.Rezeption;
 import java.util.Scanner;
 import arztpraxis.persons.Arzt;
+import arztpraxis.persons.Rezeptionistin;
+import arztpraxis.rooms.BehandlungsRaum;
+import arztpraxis.rooms.Labor;
+import arztpraxis.rooms.Raum;
+import arztpraxis.rooms.WarteRaum;
 
 public class Arztpraxis {
     static Scanner input = new Scanner(System.in);
@@ -12,29 +18,39 @@ public class Arztpraxis {
     public static Patient[] tagesPatienten = new Patient[10];
     public static String[] angeboteneImpfungen = {"MASERN", "MUMPS", "ROETELN", "HEPATITIS B", "HEPATITIS A", "FSME", "INFLUENZA"};
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         
         String[] svnNummern = {"03453534", "76853453", "546736456", "7456434345", "56734564536"};
         erzeugePatientenStamm();
         
-        Rezeption rezeption = new Rezeption();
-        Arzt arzt1 = new Arzt(1, "Oliver Hofer");
+        Rezeptionistin rezeptionistin = new Rezeptionistin(0, "Frau Maier");
         
-        // Jede Nummer in svnNummern anmelden
+        Rezeption rezeption = new Rezeption(rezeptionistin, 0, 10);
+        WarteRaum warteraum = new WarteRaum(1, 10);
+        BehandlungsRaum behandlungsraum = new BehandlungsRaum(2, 1);
+        Labor labor = new Labor(3, 10);
+        Raum[] praxisRäume = {rezeption, warteraum, behandlungsraum, labor};
+        
+        
+        AllgemeinMediziner arzt = new AllgemeinMediziner(1, "Oliver Hofer");
+        Patient patient;
+        //Jede Nummer in svnNummern anmelden
         for (int i = 0; i < svnNummern.length; i++) {
+            
+            System.out.println(svnNummern[i]+" befindet sich in der Rezeption.");
             
             // Prüfen, ob Patient in patientenStamm vorhanden ist
             if (rezeption.patientAnmelung(svnNummern[i]) == null) {
                 // -> Patient nicht vorhanden
 
                 // neuen Patient erstellen
-                Patient newPatient = rezeption.patientAufnehmen(svnNummern[i]);
-
+                patient = rezeption.neuenPatientAufnehmen(svnNummern[i]);
+                
                 // Erster freie Stelle in Patientenstamm finden
                 for (int j = 0; j < patientenStamm.length; j++) {
                     if (patientenStamm == null) {
                         // Patient hinzufügen
-                        patientenStamm[j] = newPatient;
+                        patientenStamm[j] = patient;
                         break;
                     }
                 }
@@ -43,7 +59,7 @@ public class Arztpraxis {
                 for (int j = 0; j < tagesPatienten.length; j++) {
                     if (tagesPatienten[j] == null) {
                         // Patient hinzufügen
-                        tagesPatienten[j] = newPatient;
+                        tagesPatienten[j] = patient;
                         break;
                     }
                 }
@@ -51,6 +67,7 @@ public class Arztpraxis {
             else{
                 // -> Patient vorhanden
                 
+                patient = rezeption.patientAnmelung(svnNummern[i]);
                 // Erste freie Stelle in Tagespatienten finden
                 for (int j = 0; j < tagesPatienten.length; j++) {
                     if (tagesPatienten[j] == null) {
@@ -60,9 +77,19 @@ public class Arztpraxis {
                     }
                 }
             }
+
+            System.out.println(svnNummern[i]+" nimmt im Warteraum platz.");
+            Thread.sleep(2000);
+            
+            System.out.println(svnNummern[i]+" ist nun im Behandlungsraum.");
+            arzt.erstelleDiagnose(patient, labor);
+            Thread.sleep(2000);
         }
+        /*
         // Tagespatienten anzeigen
         rezeption.zeigeTagespPatienten();
+        
+        
         
         // Patienten ID für Impfung einlesen
         System.out.println("Geben Sie die ID des zu impfenden Patienten ein: ");
@@ -79,7 +106,7 @@ public class Arztpraxis {
                 tagesPatienten[i].zeigeImpfpass();
                 break;
             }
-        }
+        }*/
     }
     
     private static void erzeugePatientenStamm() {
